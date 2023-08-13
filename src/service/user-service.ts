@@ -65,19 +65,16 @@ class UserService {
     }
 
     async sendFeedback(email: string, feedback: string) {
-        const user: IUser = await UserModel.findOne({email});
-        if (!user) {
+        if (!feedback) {
             return {
                 accessToken: '',
                 refreshToken: '',
                 user: {} as IUser,
                 error: 1,
-                message: `Такой пользователь не найден`
+                message: `Заполните поля для отзыва`
             };
         }
-
-        user.feedback = feedback
-        await user.save()
+        const user: IUser = await UserModel.updateOne({email, feedback: ''}, {$set: {feedback}});
 
         const userDto = new UserDto(user);
 
