@@ -77,7 +77,9 @@ class UserService {
 
         const user: IUser = await UserModel.findOneAndUpdate({email}, {$set: {feedback}});
 
-        const userDto = new UserDto({...user, feedback});
+        console.log(user)
+
+        const userDto = new UserDto({user});
 
         return {user: userDto}
     }
