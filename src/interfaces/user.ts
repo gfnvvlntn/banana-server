@@ -3,6 +3,4 @@ export interface IUser {
     email: string
     password?: string
     feedback: string
-
-    save?(): Promise<Promise<any>>;
 }

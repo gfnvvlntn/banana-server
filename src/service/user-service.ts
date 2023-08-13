@@ -74,7 +74,9 @@ class UserService {
                 message: `Заполните поля для отзыва`
             };
         }
-        const user: IUser = await UserModel.updateOne({email, feedback: ''}, {$set: {feedback}});
+
+        await UserModel.updateOne({email, feedback: ''}, {$set: {feedback}});
+        const user: IUser = await UserModel.findOne({email});
 
         const userDto = new UserDto(user);
 
