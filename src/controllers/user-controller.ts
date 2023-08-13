@@ -67,6 +67,18 @@ class UserController {
         }
     }
 
+    async sendFeedback(req: Request, res: Response, next: NextFunction) {
+        try {
+            const {id, feedback} = req.body;
+
+            const userData = await userService.sendFeedback(id, feedback);
+
+            return res.json(userData);
+        } catch (e) {
+            next(e);
+        }
+    }
+
     async refresh(req: Request, res: Response, next: NextFunction) {
         try {
             const {refreshToken} = req.cookies;

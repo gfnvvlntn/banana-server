@@ -3,5 +3,5 @@
   "jwtAccessToken": "super secret",
   "jwtRefreshToken": "super secret",
   "mongoUri": "mongodb://212.60.20.101:27017/",
-  "baseUrl": "http://localhost:3000"
+  "baseUrl": "http://banana-everywhere.ru/"
 }

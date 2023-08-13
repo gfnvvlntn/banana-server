@@ -19,8 +19,9 @@ router.post(
         .withMessage("Пароль должен состоять минимум из 6 символов"),
     UserController.registration
 );
-
 router.post("/login", UserController.login);
 router.post("/logout", UserController.logout);
+router.post("/send-feedback", UserController.sendFeedback);
+
 
 export default router

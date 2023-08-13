@@ -1,11 +1,11 @@
 export default class UserDto {
     email
     id
-    password
+    feedback
 
     constructor(model) {
         this.email = model.email
         this.id = model._id
-        this.password = model.password
+        this.feedback = model.feedback
     }
 }

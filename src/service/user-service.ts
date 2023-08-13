@@ -20,6 +20,7 @@ class UserService {
         const user: IUser = await UserModel.create({
             email,
             password: hashPassword,
+            feedback: ''
         });
 
         const userDto = new UserDto(user);
@@ -63,6 +64,26 @@ class UserService {
         return tokenService.removeToken(refreshToken);
     }
 
+    async sendFeedback(id: string, feedback: string) {
+        const user: IUser = await UserModel.findOne({id});
+        if (!user) {
+            return {
+                accessToken: '',
+                refreshToken: '',
+                user: {} as IUser,
+                error: 1,
+                message: `Такой пользователь не найден`
+            };
+        }
+
+        user.feedback = feedback
+        await user.save()
+
+        const userDto = new UserDto(user);
+
+        return {user: userDto}
+    }
+
 
     async refresh(refreshToken: string) {
         if (!refreshToken) {
@@ -74,9 +95,10 @@ class UserService {
             console.log('error')
         }
         const user: IUser = await UserModel.findById(tokenData);
-        const tokens = tokenService.generateTokens({...user});
-        await tokenService.saveTokens(user.id, tokens.refreshToken);
-        return {...tokens, user};
+        const userDto = new UserDto(user);
+        const tokens = tokenService.generateTokens({...userDto});
+        await tokenService.saveTokens(userDto.id, tokens.refreshToken);
+        return {...tokens, user: userDto};
     }
 }
 
