@@ -69,9 +69,9 @@ class UserController {
 
     async sendFeedback(req: Request, res: Response, next: NextFunction) {
         try {
-            const {id, feedback} = req.body;
+            const {email, feedback} = req.body;
 
-            const userData = await userService.sendFeedback(id, feedback);
+            const userData = await userService.sendFeedback(email, feedback);
 
             return res.json(userData);
         } catch (e) {

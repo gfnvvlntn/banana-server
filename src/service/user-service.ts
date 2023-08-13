@@ -64,8 +64,8 @@ class UserService {
         return tokenService.removeToken(refreshToken);
     }
 
-    async sendFeedback(id: string, feedback: string) {
-        const user: IUser = await UserModel.findOne({id});
+    async sendFeedback(email: string, feedback: string) {
+        const user: IUser = await UserModel.findOne({email});
         if (!user) {
             return {
                 accessToken: '',
