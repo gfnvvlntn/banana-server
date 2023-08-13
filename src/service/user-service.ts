@@ -79,9 +79,7 @@ class UserService {
 
         const user: IUser = await UserModel.findOne({email})
 
-        console.log(user)
-
-        const userDto = new UserDto({user});
+        const userDto = new UserDto(user);
 
         return {user: userDto}
     }
