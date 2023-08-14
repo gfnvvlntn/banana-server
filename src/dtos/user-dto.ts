@@ -1,7 +1,7 @@
 export default class UserDto {
-    email
-    id
-    feedback
+    email: string
+    id: string
+    feedback: string
 
     constructor(model) {
         this.email = model.email
